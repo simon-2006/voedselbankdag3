@@ -5,6 +5,9 @@ declare(strict_types=1);
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VoorraadController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AllergieController;
+use App\Http\Controllers\VoedselpakketOverzichtController;
+
 
 
 Route::get('/', function () {
@@ -32,4 +35,9 @@ Route::middleware('auth')->group(function () {
     
 
     Route::post('/uitloggen', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/allergieen', [AllergieController::class, 'index'])->name('allergie.index');
+
+    Route::get('/voedselpakketten', [VoedselpakketOverzichtController::class, 'index'])->name('voedselpakketten.index');
+
 });
