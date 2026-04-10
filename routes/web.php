@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\LeverancierController;
+use App\Http\Controllers\VoorraadController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('home');
@@ -21,7 +22,11 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/leveranciers', [LeverancierController::class, 'index'])->name('leveranciers.index');
+    Route::get('/voorraad',             [VoorraadController::class, 'index'])->name('voorraad.index');
+    Route::get('/voorraad/{id}',        [VoorraadController::class, 'show'])->name('voorraad.show');
+    Route::get('/voorraad/{id}/wijzig', [VoorraadController::class, 'edit'])->name('voorraad.edit');
+    Route::put('/voorraad/{id}',        [VoorraadController::class, 'update'])->name('voorraad.update');
+    
 
     Route::post('/uitloggen', [AuthController::class, 'logout'])->name('logout');
 });

@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <a href="{{ route('dashboard') }}" class="nav-link fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('voorraad.index') }}" class="nav-link fw-semibold {{ request()->routeIs('voorraad.*') ? 'active' : '' }}">Overzicht Productvoorraden</a>
+                    </li>
                     <li class="nav-item mt-2 mt-lg-0">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
