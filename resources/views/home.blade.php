@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Voedselbank Samen | Iedereen verdient een volle tafel')
 
@@ -17,6 +17,7 @@
                     <div class="d-flex flex-wrap gap-2">
                         @auth
                             <a href="{{ route('dashboard') }}" class="btn btn-primary btn-lg">Ga naar mijn dashboard</a>
+                            <a href="{{ route('voedselpakketten.index') }}" class="btn btn-outline-success btn-lg">Overzicht voedselpakketten</a>
                         @else
                             <a href="{{ route('register') }}" class="btn btn-primary btn-lg">Vraag hulp aan</a>
                             <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-lg">Ik heb al een account</a>
@@ -54,7 +55,7 @@
             <div class="card border-0 shadow-sm h-100 card-lift">
                 <div class="card-body p-4">
                     <h3 class="h4 mb-2">Donaties</h3>
-                    <p class="text-secondary mb-0">Lever houdbare producten in of steun met een financi�le bijdrage.</p>
+                    <p class="text-secondary mb-0">Lever houdbare producten in of steun met een financiële bijdrage.</p>
                 </div>
             </div>
         </article>
@@ -69,3 +70,4 @@
         </article>
     </section>
 @endsection
+

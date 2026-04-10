@@ -27,5 +27,17 @@
                 </div>
             </div>
         </article>
+
+        <article class="col-12 reveal reveal-delay-3">
+            <div class="card border-0 shadow-sm h-100 card-lift">
+                <div class="card-body p-4 d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+                    <div>
+                        <h3 class="h4 mb-2">Overzicht voedselpakketten</h3>
+                        <p class="text-secondary mb-0">Bekijk alle gezinnen met voedselpakketten en filter op eetwens.</p>
+                    </div>
+                    <a href="{{ route('voedselpakketten.index') }}" class="btn btn-success px-4">Open overzicht</a>
+                </div>
+            </div>
+        </article>
     </section>
 @endsection
