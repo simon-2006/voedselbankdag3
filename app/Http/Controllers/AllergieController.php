@@ -98,6 +98,13 @@ class AllergieController extends Controller
             abort(404);
         }
 
+        // Als de gekozen allergie gelijk is aan de huidige, is er functioneel niets gewijzigd.
+        if ((int) $persoon->AllergieId === (int) $validated['allergie_id']) {
+            return redirect()
+                ->route('allergie.edit', ['gezin' => $gezinId, 'persoon' => $persoonId])
+                ->with('wijziging_niet_doorgvoerd', 'Allergie niet gewijzigd');
+        }
+
         DB::statement('CALL sp_allergie_wijzig_persoon(?, ?, ?)', [
             $persoonId,
             $persoon->AllergieId,

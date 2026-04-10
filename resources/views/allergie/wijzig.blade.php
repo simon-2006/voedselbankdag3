@@ -22,7 +22,9 @@
                 <div class="invalid-feedback d-block mb-3">{{ $message }}</div>
             @enderror
 
-            @if (session('wijziging_doorgvoerd'))
+            @if (session('wijziging_niet_doorgvoerd'))
+                <div class="alert alert-danger mb-3">{{ session('wijziging_niet_doorgvoerd') }}</div>
+            @elseif (session('wijziging_doorgvoerd'))
                 <div class="alert alert-success mb-3">{{ session('wijziging_doorgvoerd') }}</div>
             @elseif ($heeftHoogRisico)
                 <div class="alert alert-danger mb-3">
