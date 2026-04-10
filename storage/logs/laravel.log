@@ -4586,3 +4586,11 @@
 [2026-04-10 11:54:36] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
 [2026-04-10 11:54:41] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
 [2026-04-10 11:54:41] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 12:06:46] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 12:06:49] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 12:06:51] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":1,"aantal_gezinnen":0} 
+[2026-04-10 12:06:56] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":4,"aantal_gezinnen":1} 
+[2026-04-10 12:06:58] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":2,"aantal_gezinnen":1} 
+[2026-04-10 12:07:00] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":3,"aantal_gezinnen":0} 
+[2026-04-10 12:07:03] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 12:21:37] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
