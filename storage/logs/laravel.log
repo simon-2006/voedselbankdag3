@@ -13085,3 +13085,4 @@
 [2026-04-10 12:35:29] local.WARNING: Gebruiker ID 1 probeerde product ID 3 te verkorten.  
 [2026-04-10 12:35:35] local.INFO: Product ID 3 succesvol verlengd tot 2026-05-03 door Gebruiker ID 1  
 [2026-04-10 12:35:45] local.WARNING: Gebruiker ID 1 probeerde product ID 3 met meer dan 7 dagen te verlengen.  
+[2026-04-10 13:50:48] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
