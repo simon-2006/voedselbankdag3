@@ -221,6 +221,47 @@ h4,
     font-size: 0.9rem;
 }
 
+.overview-heading {
+    color: var(--vb-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.16em;
+}
+
+.overzicht-filter-form .form-select {
+    min-width: 220px;
+}
+
+.overzicht-filter-form .invalid-feedback {
+    margin-top: -0.25rem;
+}
+
+.overzicht-table thead th {
+    font-size: 0.9rem;
+    color: #3e4764;
+    background: #f9efe2;
+    border-bottom-width: 1px;
+}
+
+.overzicht-table tbody td {
+    vertical-align: middle;
+}
+
+.detail-pill {
+    font-weight: 600;
+    color: #3a4668 !important;
+    border: 1px solid rgba(58, 70, 104, 0.2);
+    white-space: normal;
+}
+
+.detail-icon {
+    display: inline-block;
+    color: #3a79ff;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1;
+}
+
 .reveal {
     opacity: 0;
     transform: translateY(14px);

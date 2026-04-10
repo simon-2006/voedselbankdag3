@@ -17,6 +17,7 @@
                     <li><a href="{{ route('home') }}">Homepage</a></li>
                     @auth
                         <li><a href="{{ route('dashboard') }}">Mijn dashboard</a></li>
+                        <li><a href="{{ route('voedselpakketten.index') }}">Overzicht voedselpakketten</a></li>
                     @else
                         <li><a href="{{ route('login') }}">Inloggen</a></li>
                         <li><a href="{{ route('register') }}">Registreren</a></li>
