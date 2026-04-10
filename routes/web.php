@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/voorraad/{id}/wijzig', [VoorraadController::class, 'edit'])->name('voorraad.edit');
     Route::put('/voorraad/{id}',        [VoorraadController::class, 'update'])->name('voorraad.update');
     
+    
 
     Route::post('/uitloggen', [AuthController::class, 'logout'])->name('logout');
 });
