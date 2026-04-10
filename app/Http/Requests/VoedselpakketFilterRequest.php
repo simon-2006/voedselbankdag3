@@ -16,20 +16,30 @@ class VoedselpakketFilterRequest extends FormRequest
 
     public function rules(): array
     {
-        if (! Schema::hasTable('Eetwens')) {
+        if (Schema::hasTable('Eetwens')) {
             return [
-                'eetwens_id' => ['nullable', 'integer', 'min:1'],
+                'eetwens_id' => [
+                    'nullable',
+                    'integer',
+                    Rule::exists('Eetwens', 'Id')->where(static function ($query) {
+                        $query->where('IsActief', 1);
+                    }),
+                ],
+            ];
+        }
+
+        if (Schema::hasTable('wens_allergies')) {
+            return [
+                'eetwens_id' => [
+                    'nullable',
+                    'integer',
+                    Rule::exists('wens_allergies', 'id'),
+                ],
             ];
         }
 
         return [
-            'eetwens_id' => [
-                'nullable',
-                'integer',
-                Rule::exists('Eetwens', 'Id')->where(static function ($query) {
-                    $query->where('IsActief', 1);
-                }),
-            ],
+            'eetwens_id' => ['nullable', 'integer', 'min:1'],
         ];
     }
 
