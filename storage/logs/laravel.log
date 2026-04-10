@@ -4690,3 +4690,7 @@
 [2026-04-10 12:35:20] local.INFO: Voedselpakket details per gezin geladen. {"gebruiker_id":1,"gezin_id":2,"aantal_voedselpakketten":3} 
 [2026-04-10 12:35:20] local.INFO: Voedselpakket details per gezin geladen. {"gebruiker_id":1,"gezin_id":2,"aantal_voedselpakketten":3} 
 [2026-04-10 12:35:22] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 13:07:35] local.INFO: Voedselpakket details per gezin geladen. {"gebruiker_id":1,"gezin_id":2,"aantal_voedselpakketten":3} 
+[2026-04-10 13:10:20] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 13:10:32] local.INFO: Voedselpakket details per gezin geladen. {"gebruiker_id":1,"gezin_id":2,"aantal_voedselpakketten":3} 
+[2026-04-10 13:10:41] local.INFO: Statusformulier voedselpakket geladen. {"gebruiker_id":1,"voedselpakket_id":6,"is_geblokkeerd":false} 
