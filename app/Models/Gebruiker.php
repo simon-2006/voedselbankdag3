@@ -43,6 +43,11 @@ class Gebruiker extends Authenticatable
         return $this->Wachtwoord;
     }
 
+    public function getAuthPasswordName(): string
+    {
+        return 'Wachtwoord';
+    }
+
     public function getNameAttribute(): string
     {
         return (string) $this->InlogNaam;
