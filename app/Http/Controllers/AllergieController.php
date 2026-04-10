@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Allergie;
+use App\Models\AllergiePerPersoon;
+use App\Models\Gezin;
+use App\Models\Persoon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class AllergieController extends Controller
@@ -17,8 +20,8 @@ class AllergieController extends Controller
         $geselecteerdeAllergieId = (int) $request->query('allergie_id', 0);
         $parameter = $geselecteerdeAllergieId > 0 ? $geselecteerdeAllergieId : null;
 
-        $allergieen = DB::select('CALL sp_allergie_overzicht_allergieen()');
-        $gezinnen = DB::select('CALL sp_allergie_overzicht_gezinnen(?)', [$parameter]);
+        $allergieen = Allergie::overzichtAllergieen();
+        $gezinnen = Gezin::overzichtMetAllergie($parameter);
 
         return view('allergie.overzicht', [
             'allergieen' => $allergieen,
@@ -34,16 +37,16 @@ class AllergieController extends Controller
      */
     public function showGezin(int $gezinId): View
     {
-        $samenvattingRows = DB::select('CALL sp_allergie_gezin_samenvatting(?)', [$gezinId]);
+        $gezin = Gezin::samenvatting($gezinId);
 
-        if ($samenvattingRows === []) {
+        if ($gezin === null) {
             abort(404);
         }
 
-        $personen = DB::select('CALL sp_allergie_gezin_personen(?)', [$gezinId]);
+        $personen = Gezin::personenMetAllergieen($gezinId);
 
         return view('allergie.gezin', [
-            'gezin' => $samenvattingRows[0],
+            'gezin' => $gezin,
             'personen' => $personen,
         ]);
     }
@@ -53,20 +56,18 @@ class AllergieController extends Controller
      */
     public function edit(int $gezinId, int $persoonId): View
     {
-        $persoonRows = DB::select('CALL sp_allergie_persoon_huidige_allergie(?)', [$persoonId]);
+        $persoon = Persoon::huidigeAllergieGegevens($persoonId);
 
-        if ($persoonRows === []) {
+        if ($persoon === null) {
             abort(404);
         }
-
-        $persoon = $persoonRows[0];
 
         // Extra check: persoon moet bij het opgevraagde gezin horen.
         if ((int) $persoon->GezinId !== $gezinId) {
             abort(404);
         }
 
-        $allergieen = DB::select('CALL sp_allergie_overzicht_allergieen()');
+        $allergieen = Allergie::overzichtAllergieen();
         $heeftHoogRisico = $this->heeftHoogAnafylactischRisico((string) ($persoon->AnafylactischRisico ?? ''));
 
         return view('allergie.wijzig', [
@@ -86,13 +87,11 @@ class AllergieController extends Controller
             'allergie_id' => ['required', 'integer', 'min:1'],
         ]);
 
-        $persoonRows = DB::select('CALL sp_allergie_persoon_huidige_allergie(?)', [$persoonId]);
+        $persoon = Persoon::huidigeAllergieGegevens($persoonId);
 
-        if ($persoonRows === []) {
+        if ($persoon === null) {
             abort(404);
         }
-
-        $persoon = $persoonRows[0];
 
         if ((int) $persoon->GezinId !== $gezinId) {
             abort(404);
@@ -105,11 +104,11 @@ class AllergieController extends Controller
                 ->with('wijziging_niet_doorgvoerd', 'Allergie niet gewijzigd');
         }
 
-        DB::statement('CALL sp_allergie_wijzig_persoon(?, ?, ?)', [
+        AllergiePerPersoon::wijzigVoorPersoon(
             $persoonId,
             $persoon->AllergieId,
-            (int) $validated['allergie_id'],
-        ]);
+            (int) $validated['allergie_id']
+        );
 
         return redirect()
             ->route('allergie.edit', ['gezin' => $gezinId, 'persoon' => $persoonId])

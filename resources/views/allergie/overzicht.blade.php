@@ -16,7 +16,7 @@
                         </option>
                     @endforeach
                 </select>
-                <button type="submit" class="btn wireframe-btn-secondary">Toon Gezinnen</button>
+                <button type="submit" class="btn wireframe-btn-secondary text-nowrap">Toon Gezinnen</button>
             </form>
         </div>
 
