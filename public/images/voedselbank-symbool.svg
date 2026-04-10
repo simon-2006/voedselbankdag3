@@ -1,0 +1,26 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grain" x1="16" y1="16" x2="112" y2="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F2A13D" />
+      <stop offset="1" stop-color="#E2632E" />
+    </linearGradient>
+    <linearGradient id="leaf" x1="37" y1="18" x2="93" y2="68" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#64B765" />
+      <stop offset="1" stop-color="#2E8E53" />
+    </linearGradient>
+  </defs>
+
+  <circle cx="64" cy="64" r="60" fill="#FFF7EA" />
+
+  <path d="M24 76C24 67.1634 31.1634 60 40 60H88C96.8366 60 104 67.1634 104 76V86C104 94.8366 96.8366 102 88 102H40C31.1634 102 24 94.8366 24 86V76Z" fill="url(#grain)" />
+
+  <path d="M36 60C37.7909 48.6187 48.2735 40 60 40H68C79.7265 40 90.2091 48.6187 92 60" stroke="#9C4A1B" stroke-width="8" stroke-linecap="round" />
+
+  <path d="M64 24C73.6 24 83.2 28.4 88 36C80 40 70.4 39.2 64 33.6C57.6 39.2 48 40 40 36C44.8 28.4 54.4 24 64 24Z" fill="url(#leaf)" />
+
+  <path d="M64 34V54" stroke="#1F6F46" stroke-width="4" stroke-linecap="round" />
+
+  <circle cx="47" cy="80" r="6" fill="#FFF3DE" />
+  <circle cx="64" cy="84" r="6" fill="#FFF3DE" />
+  <circle cx="81" cy="80" r="6" fill="#FFF3DE" />
+</svg>
