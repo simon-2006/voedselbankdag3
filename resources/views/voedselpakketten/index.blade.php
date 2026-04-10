@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="card border-0 shadow-lg p-4 p-lg-5 reveal">
-        @if (! empty($feedbackMessage))
+        @if (! empty($feedbackMessage) && ($feedbackType ?? null) === 'danger')
             <div class="alert alert-{{ $feedbackType ?? 'info' }} shadow-sm mb-4" role="alert">
                 {{ $feedbackMessage }}
             </div>
@@ -18,11 +18,8 @@
                 <select name="eetwens_id" id="eetwens_id" class="form-select @error('eetwens_id') is-invalid @enderror" aria-label="Selecteer Eetwens">
                     <option value="">Selecteer Eetwens</option>
                     @foreach ($eetwensen as $eetwens)
-                        @php
-                            $toonNaam = $eetwens->Naam === 'GeenVarken' ? 'Geen Varken' : $eetwens->Naam;
-                        @endphp
                         <option value="{{ $eetwens->Id }}" @selected((string) $selectedEetwensId === (string) $eetwens->Id)>
-                            {{ $toonNaam }}
+                            {{ $eetwens->Naam }}
                         </option>
                     @endforeach
                 </select>
@@ -50,29 +47,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($gezinnen as $gezin)
-                        <tr>
-                            <td class="fw-semibold">{{ $gezin->Gezinsnaam }}</td>
-                            <td>{{ $gezin->Omschrijving }}</td>
-                            <td>{{ $gezin->AantalVolwassenen }}</td>
-                            <td>{{ $gezin->AantalKinderen }}</td>
-                            <td>{{ $gezin->AantalBabys }}</td>
-                            <td>{{ $gezin->Vertegenwoordiger !== '' ? $gezin->Vertegenwoordiger : 'Onbekend' }}</td>
-                            <td class="text-center">
-                                <span class="badge text-bg-light detail-pill" title="Aantal pakketten en producteenheden">
-                                    {{ $gezin->AantalPakketten }} pakket(ten) - {{ $gezin->TotaalProductEenheden }} producten
-                                </span>
-                            </td>
-                        </tr>
-                    @empty
+                    @if ($gezinnen->isNotEmpty())
+                        @foreach ($gezinnen as $gezin)
+                            <tr>
+                                <td class="fw-semibold">{{ $gezin->Gezinsnaam }}</td>
+                                <td>{{ $gezin->Omschrijving }}</td>
+                                <td>{{ $gezin->AantalVolwassenen }}</td>
+                                <td>{{ $gezin->AantalKinderen }}</td>
+                                <td>{{ $gezin->AantalBabys }}</td>
+                                <td>{{ $gezin->Vertegenwoordiger !== '' ? $gezin->Vertegenwoordiger : 'Onbekend' }}</td>
+                                <td class="text-center">
+                                    <span class="detail-icon" title="{{ $gezin->AantalPakketten }} pakket(ten), {{ $gezin->TotaalProductEenheden }} producteenheden">□</span>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @elseif ($selectedEetwensId !== null)
                         <tr>
                             <td colspan="7" class="p-0 border-0">
                                 <div class="alert alert-warning m-2 mb-0" role="alert">
-                                    {{ $feedbackMessage ?? 'Er zijn nog geen gezinnen met voedselpakketten gevonden.' }}
+                                    Er zijn geen gezinnen bekent die de geselecteerde eetwens hebben
                                 </div>
                             </td>
                         </tr>
-                    @endforelse
+                    @else
+                        <tr>
+                            <td colspan="7" class="text-secondary py-4 text-center">
+                                Er zijn nog geen gezinnen met voedselpakketten gevonden.
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

@@ -36,18 +36,15 @@ class VoedselpakketOverzichtController extends Controller
             $eetwensen = $this->overzichtService->getActieveEetwensen();
             $gezinnen = $this->overzichtService->getGezinnenMetVoedselpakketten($selectedEetwensId);
 
-            $feedbackType = 'info';
-            $feedbackMessage = 'Alle gezinnen met voedselpakketten worden getoond.';
+            $feedbackType = null;
+            $feedbackMessage = null;
 
             if ($selectedEetwensId !== null && $gezinnen->isEmpty()) {
                 $feedbackType = 'warning';
                 $feedbackMessage = 'Er zijn geen gezinnen bekent die de geselecteerde eetwens hebben';
-            } elseif ($selectedEetwensId !== null) {
-                $feedbackType = 'success';
-                $feedbackMessage = 'Filter toegepast: ' . $gezinnen->count() . ' gezin(nen) gevonden.';
             }
 
-            Log::info('Overzicht voedselpakketten geladen.', [
+            Log::channel('voedselpakket')->info('Overzicht voedselpakketten geladen.', [
                 'gebruiker_id' => $gebruiker->Id,
                 'eetwens_id' => $selectedEetwensId,
                 'aantal_gezinnen' => $gezinnen->count(),
@@ -61,14 +58,14 @@ class VoedselpakketOverzichtController extends Controller
                 'feedbackMessage' => $feedbackMessage,
             ]);
         } catch (AuthorizationException $exception) {
-            Log::warning('Toegang geweigerd op overzicht voedselpakketten.', [
+            Log::channel('voedselpakket')->warning('Toegang geweigerd op overzicht voedselpakketten.', [
                 'gebruiker_id' => $gebruiker?->Id,
                 'reden' => $exception->getMessage(),
             ]);
 
             abort(403, $exception->getMessage());
         } catch (Throwable $exception) {
-            Log::error('Fout bij ophalen overzicht voedselpakketten.', [
+            Log::channel('voedselpakket')->error('Fout bij ophalen overzicht voedselpakketten.', [
                 'gebruiker_id' => $gebruiker?->Id,
                 'eetwens_id' => $selectedEetwensId,
                 'error' => $exception->getMessage(),

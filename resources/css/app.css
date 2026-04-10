@@ -254,6 +254,14 @@ h4,
     white-space: normal;
 }
 
+.detail-icon {
+    display: inline-block;
+    color: #3a79ff;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1;
+}
+
 .reveal {
     opacity: 0;
     transform: translateY(14px);
