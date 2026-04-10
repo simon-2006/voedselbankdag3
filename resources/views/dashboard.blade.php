@@ -3,6 +3,11 @@
 @section('title', 'Dashboard | Voedselbank Samen')
 
 @section('content')
+    <section class="mb-4 reveal">
+        <h1 class="h2 mb-2">Homepage voedselbank maaskantje</h1>
+        <a href="{{ route('voorraad.index') }}" class="h3 text-decoration-underline">Overzicht Productvoorraden</a>
+    </section>
+
     <section class="card border-0 shadow-lg p-4 p-lg-5 reveal mb-4">
         <p class="section-eyebrow mb-2">Mijn omgeving</p>
         <h1 class="display-6 fw-semibold mb-3">Welkom, {{ auth()->user()->name }}</h1>

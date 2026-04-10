@@ -3,9 +3,12 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\LeverancierController;
-use App\Http\Controllers\VoedselpakketOverzichtController;
+use App\Http\Controllers\VoorraadController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AllergieController;
+use App\Http\Controllers\VoedselpakketOverzichtController;
+
+
 
 Route::get('/', function () {
     return view('home');
@@ -24,11 +27,20 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/leveranciers', [LeverancierController::class, 'index'])
-        ->name('leveranciers.index');
-
-    Route::get('/overzicht-voedselpakketten', [VoedselpakketOverzichtController::class, 'index'])
-        ->name('voedselpakketten.index');
+    Route::get('/voorraad',             [VoorraadController::class, 'index'])->name('voorraad.index');
+    Route::get('/voorraad/{id}',        [VoorraadController::class, 'show'])->name('voorraad.show');
+    Route::get('/voorraad/{id}/wijzig', [VoorraadController::class, 'edit'])->name('voorraad.edit');
+    Route::put('/voorraad/{id}',        [VoorraadController::class, 'update'])->name('voorraad.update');
+    
+    
 
     Route::post('/uitloggen', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/gezinsallergieen', [AllergieController::class, 'index'])->name('allergie.index');
+    Route::get('/gezinsallergieen/gezin/{gezin}', [AllergieController::class, 'showGezin'])->name('allergie.gezin');
+    Route::get('/gezinsallergieen/gezin/{gezin}/persoon/{persoon}/wijzig', [AllergieController::class, 'edit'])->name('allergie.edit');
+    Route::post('/gezinsallergieen/gezin/{gezin}/persoon/{persoon}/wijzig', [AllergieController::class, 'update'])->name('allergie.update');
+
+    Route::get('/voedselpakketten', [VoedselpakketOverzichtController::class, 'index'])->name('voedselpakketten.index');
+
 });

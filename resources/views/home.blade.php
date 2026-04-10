@@ -17,7 +17,6 @@
                     <div class="d-flex flex-wrap gap-2">
                         @auth
                             <a href="{{ route('dashboard') }}" class="btn btn-primary btn-lg">Ga naar mijn dashboard</a>
-                            <a href="{{ route('voedselpakketten.index') }}" class="btn btn-outline-success btn-lg">Overzicht voedselpakketten</a>
                         @else
                             <a href="{{ route('register') }}" class="btn btn-primary btn-lg">Vraag hulp aan</a>
                             <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-lg">Ik heb al een account</a>

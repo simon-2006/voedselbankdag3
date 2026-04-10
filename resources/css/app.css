@@ -297,3 +297,69 @@ h4,
         font-size: 2rem;
     }
 }
+
+/* Wireframe-styling voor de allergie-opdrachten */
+.wireframe-card {
+    background: #fff;
+    border: 1px solid #e6e8ec;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    padding: 1.5rem;
+}
+
+.wireframe-title {
+    color: #198754;
+    text-decoration: underline;
+    font-size: clamp(2rem, 2.7vw, 3rem);
+    font-weight: 500;
+}
+
+.wireframe-select {
+    min-width: 260px;
+    max-width: 420px;
+}
+
+.wireframe-btn-secondary {
+    --bs-btn-bg: #6c757d;
+    --bs-btn-border-color: #6c757d;
+    --bs-btn-hover-bg: #5f676f;
+    --bs-btn-hover-border-color: #5f676f;
+    --bs-btn-active-bg: #565e64;
+    --bs-btn-active-border-color: #565e64;
+    --bs-btn-color: #fff;
+}
+
+.wireframe-table th {
+    font-weight: 700;
+}
+
+.summary-table {
+    max-width: 520px;
+}
+
+.summary-table th {
+    width: 70%;
+}
+
+.icon-link {
+    color: #3a76ff;
+}
+
+.icon-link:hover {
+    color: #195de8;
+}
+
+.allergie-filter-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+@media (max-width: 767.98px) {
+    .allergie-filter-form {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
