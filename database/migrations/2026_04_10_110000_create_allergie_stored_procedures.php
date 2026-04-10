@@ -18,17 +18,17 @@ return new class extends Migration
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_allergie_persoon_huidige_allergie');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_allergie_wijzig_persoon');
 
-        DB::unprepared('
+        DB::unprepared(<<<'SQL'
             CREATE PROCEDURE sp_allergie_overzicht_allergieen()
             BEGIN
                 SELECT a.Id, a.Naam
                 FROM Allergie a
-                WHERE a.IsActief = b''1''
+                WHERE a.IsActief = b'1'
                 ORDER BY a.Naam;
             END
-        ');
+        SQL);
 
-        DB::unprepared('
+        DB::unprepared(<<<'SQL'
             CREATE PROCEDURE sp_allergie_overzicht_gezinnen(IN p_allergie_id BIGINT)
             BEGIN
                 SELECT
@@ -40,35 +40,35 @@ return new class extends Migration
                     g.AantalBabys,
                     COALESCE(
                         (
-                            SELECT CONCAT_WS('' '', vp.Voornaam, NULLIF(vp.Tussenvoegsel, ''''), vp.Achternaam)
+                            SELECT CONCAT_WS(' ', vp.Voornaam, NULLIF(vp.Tussenvoegsel, ''), vp.Achternaam)
                             FROM Persoon vp
                             WHERE vp.GezinId = g.Id
-                              AND vp.IsActief = b''1''
-                              AND vp.IsVertegenwoordiger = b''1''
+                              AND vp.IsActief = b'1'
+                              AND vp.IsVertegenwoordiger = b'1'
                             LIMIT 1
                         ),
-                        ''-''
+                        '-'
                     ) AS Vertegenwoordiger
                 FROM Gezin g
-                WHERE g.IsActief = b''1''
+                WHERE g.IsActief = b'1'
                   AND EXISTS (
                     SELECT 1
                     FROM Persoon p
                     INNER JOIN AllergiePerPersoon ap
                         ON ap.PersoonId = p.Id
-                       AND ap.IsActief = b''1''
+                       AND ap.IsActief = b'1'
                     INNER JOIN Allergie a
                         ON a.Id = ap.AllergieId
-                       AND a.IsActief = b''1''
+                       AND a.IsActief = b'1'
                     WHERE p.GezinId = g.Id
-                      AND p.IsActief = b''1''
+                      AND p.IsActief = b'1'
                       AND (p_allergie_id IS NULL OR a.Id = p_allergie_id)
                   )
                 ORDER BY g.Naam;
             END
-        ');
+        SQL);
 
-        DB::unprepared('
+        DB::unprepared(<<<'SQL'
             CREATE PROCEDURE sp_allergie_gezin_samenvatting(IN p_gezin_id BIGINT)
             BEGIN
                 SELECT
@@ -78,65 +78,65 @@ return new class extends Migration
                     g.TotaalAantalPersonen
                 FROM Gezin g
                 WHERE g.Id = p_gezin_id
-                  AND g.IsActief = b''1''
+                  AND g.IsActief = b'1'
                 LIMIT 1;
             END
-        ');
+        SQL);
 
-        DB::unprepared('
+        DB::unprepared(<<<'SQL'
             CREATE PROCEDURE sp_allergie_gezin_personen(IN p_gezin_id BIGINT)
             BEGIN
                 SELECT
                     p.Id AS PersoonId,
-                    CONCAT_WS('' '', p.Voornaam, NULLIF(p.Tussenvoegsel, ''''), p.Achternaam) AS Naam,
+                    CONCAT_WS(' ', p.Voornaam, NULLIF(p.Tussenvoegsel, ''), p.Achternaam) AS Naam,
                     p.TypePersoon,
                     CASE
-                        WHEN p.IsVertegenwoordiger = b''1'' THEN ''Vertegenwoordiger''
-                        ELSE ''Gezinslid''
+                        WHEN p.IsVertegenwoordiger = b'1' THEN 'Vertegenwoordiger'
+                        ELSE 'Gezinslid'
                     END AS Gezinsrol,
                     COALESCE(
-                        GROUP_CONCAT(DISTINCT a.Naam ORDER BY a.Naam SEPARATOR '', ''),
-                        ''-''
+                        GROUP_CONCAT(DISTINCT a.Naam ORDER BY a.Naam SEPARATOR ', '),
+                        '-'
                     ) AS Allergie
                 FROM Persoon p
                 LEFT JOIN AllergiePerPersoon ap
                     ON ap.PersoonId = p.Id
-                   AND ap.IsActief = b''1''
+                   AND ap.IsActief = b'1'
                 LEFT JOIN Allergie a
                     ON a.Id = ap.AllergieId
-                   AND a.IsActief = b''1''
+                   AND a.IsActief = b'1'
                 WHERE p.GezinId = p_gezin_id
-                  AND p.IsActief = b''1''
+                  AND p.IsActief = b'1'
                 GROUP BY p.Id, p.Voornaam, p.Tussenvoegsel, p.Achternaam, p.TypePersoon, p.IsVertegenwoordiger
                 ORDER BY p.Id;
             END
-        ');
+        SQL);
 
-        DB::unprepared('
+        DB::unprepared(<<<'SQL'
             CREATE PROCEDURE sp_allergie_persoon_huidige_allergie(IN p_persoon_id BIGINT)
             BEGIN
                 SELECT
                     p.Id AS PersoonId,
                     p.GezinId,
-                    CONCAT_WS('' '', p.Voornaam, NULLIF(p.Tussenvoegsel, ''''), p.Achternaam) AS Naam,
+                    CONCAT_WS(' ', p.Voornaam, NULLIF(p.Tussenvoegsel, ''), p.Achternaam) AS Naam,
                     ap.AllergieId,
                     a.Naam AS AllergieNaam,
                     a.AnafylactischRisico
                 FROM Persoon p
                 LEFT JOIN AllergiePerPersoon ap
                     ON ap.PersoonId = p.Id
-                   AND ap.IsActief = b''1''
+                   AND ap.IsActief = b'1'
                 LEFT JOIN Allergie a
                     ON a.Id = ap.AllergieId
-                   AND a.IsActief = b''1''
+                   AND a.IsActief = b'1'
                 WHERE p.Id = p_persoon_id
-                  AND p.IsActief = b''1''
+                  AND p.IsActief = b'1'
                 ORDER BY ap.Id
                 LIMIT 1;
             END
-        ');
+        SQL);
 
-        DB::unprepared('
+        DB::unprepared(<<<'SQL'
             CREATE PROCEDURE sp_allergie_wijzig_persoon(
                 IN p_persoon_id BIGINT,
                 IN p_oude_allergie_id BIGINT,
@@ -154,7 +154,7 @@ return new class extends Migration
                     SELECT
                         p_persoon_id,
                         p_nieuwe_allergie_id,
-                        b''1'',
+                        b'1',
                         NOW(6),
                         NOW(6)
                     FROM DUAL
@@ -183,7 +183,7 @@ return new class extends Migration
                         SELECT
                             p_persoon_id,
                             p_nieuwe_allergie_id,
-                            b''1'',
+                            b'1',
                             NOW(6),
                             NOW(6)
                         FROM DUAL
@@ -196,7 +196,7 @@ return new class extends Migration
                     END IF;
                 END IF;
             END
-        ');
+        SQL);
     }
 
     /**

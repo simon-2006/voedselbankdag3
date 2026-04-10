@@ -380,3 +380,33 @@
 #62 C:/Program Files/Herd/resources/app.asar.unpacked/resources/valet/server.php(139): require('C://Proef examen...')
 #63 {main}
 "} 
+[2026-04-10 09:03:53] local.ERROR: rename(C:\Proef examen\vodselbank-op-1-dag-\storage\framework\views\cf2F52.tmp,C:\Proef examen\vodselbank-op-1-dag-\storage\framework\views/cf22d9094d3a68a06b2026ec32501971.php): Access is denied (code: 5) {"exception":"[object] (ErrorException(code: 0): rename(C:\\Proef examen\\vodselbank-op-1-dag-\\storage\\framework\\views\\cf2F52.tmp,C:\\Proef examen\\vodselbank-op-1-dag-\\storage\\framework\\views/cf22d9094d3a68a06b2026ec32501971.php): Access is denied (code: 5) at C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:233)
+[stacktrace]
+#0 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate/Foundation/Bootstrap/HandleExceptions->handleError(2, 'rename(C://Proef...', 'C://Proef examen...', 233)
+#1 [internal function]: Illuminate/Foundation/Bootstrap/HandleExceptions->{closure:Illuminate/Foundation/Bootstrap/HandleExceptions::forwardsTo():257}(2, 'rename(C://Proef...', 'C://Proef examen...', 233)
+#2 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(233): rename('C://Proef examen...', 'C://Proef examen...')
+#3 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(199): Illuminate/Filesystem/Filesystem->replace('C://Proef examen...', '<?php $__env->s...')
+#4 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Foundation/Console/ViewCacheCommand.php(64): Illuminate/View/Compilers/BladeCompiler->compile('C://Proef examen...')
+#5 [internal function]: Illuminate/Foundation/Console/ViewCacheCommand->{closure:Illuminate/Foundation/Console/ViewCacheCommand::compileViews():61}(Object(Symfony/Component/Finder/SplFileInfo), 'C://Proef examen...')
+#6 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Collections/Arr.php(841): array_map(Object(Closure), Array, Array)
+#7 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Collections/Collection.php(826): Illuminate/Support/Arr::map(Array, Object(Closure))
+#8 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Foundation/Console/ViewCacheCommand.php(61): Illuminate/Support/Collection->map(Object(Closure))
+#9 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Foundation/Console/ViewCacheCommand.php(43): Illuminate/Foundation/Console/ViewCacheCommand->compileViews(Object(Illuminate/Support/Collection))
+#10 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php(275): Illuminate/Foundation/Console/ViewCacheCommand->{closure:Illuminate/Foundation/Console/ViewCacheCommand::handle():38}('C://Proef examen...', 0)
+#11 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Foundation/Console/ViewCacheCommand.php(38): Illuminate/Support/Collection->each(Object(Closure))
+#12 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate/Foundation/Console/ViewCacheCommand->handle()
+#13 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate/Container/BoundMethod::{closure:Illuminate/Container/BoundMethod::call():35}()
+#14 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(96): Illuminate/Container/Util::unwrapIfClosure(Object(Closure))
+#15 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate/Container/BoundMethod::callBoundMethod(Object(Illuminate/Foundation/Application), Array, Object(Closure))
+#16 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Container/Container.php(799): Illuminate/Container/BoundMethod::call(Object(Illuminate/Foundation/Application), Array, Array, NULL)
+#17 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Console/Command.php(280): Illuminate/Container/Container->call(Array)
+#18 C:/Proef examen/vodselbank-op-1-dag-/vendor/symfony/console/Command/Command.php(341): Illuminate/Console/Command->execute(Object(Symfony/Component/Console/Input/ArgvInput), Object(Illuminate/Console/OutputStyle))
+#19 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Console/Command.php(249): Symfony/Component/Console/Command/Command->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Illuminate/Console/OutputStyle))
+#20 C:/Proef examen/vodselbank-op-1-dag-/vendor/symfony/console/Application.php(1117): Illuminate/Console/Command->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#21 C:/Proef examen/vodselbank-op-1-dag-/vendor/symfony/console/Application.php(356): Symfony/Component/Console/Application->doRunCommand(Object(Illuminate/Foundation/Console/ViewCacheCommand), Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#22 C:/Proef examen/vodselbank-op-1-dag-/vendor/symfony/console/Application.php(195): Symfony/Component/Console/Application->doRun(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#23 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony/Component/Console/Application->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#24 C:/Proef examen/vodselbank-op-1-dag-/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#25 C:/Proef examen/vodselbank-op-1-dag-/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#26 {main}
+"} 
