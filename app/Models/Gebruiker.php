@@ -43,6 +43,14 @@ class Gebruiker extends Authenticatable
         return $this->Wachtwoord;
     }
 
+    /**
+     * Gebruik de echte databasekolomnaam voor authenticatie-updates.
+     */
+    public function getAuthPasswordName(): string
+    {
+        return 'Wachtwoord';
+    }
+
     public function getNameAttribute(): string
     {
         return (string) $this->InlogNaam;
