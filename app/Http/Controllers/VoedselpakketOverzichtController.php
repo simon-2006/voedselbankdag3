@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VoedselpakketFilterRequest;
@@ -12,17 +14,24 @@ use Throwable;
 
 class VoedselpakketOverzichtController extends Controller
 {
-    public function __construct(private readonly VoedselpakketOverzichtService $overzichtService)
-    {
-        // Dependency Injection houdt controller dun en volgt de MVC-structuur.
-    }
+    public function __construct(
+        private readonly VoedselpakketOverzichtService $overzichtService
+    ) {}
 
+    /**
+     * Toon overzicht gezinnen met voedselpakketten.
+     *
+     * @throws AuthorizationException
+     */
     public function index(VoedselpakketFilterRequest $request): View
     {
         /** @var Gebruiker|null $gebruiker */
         $gebruiker = $request->user();
+
         $selectedEetwensId = $request->validated('eetwens_id');
-        $selectedEetwensId = $selectedEetwensId !== null ? (int) $selectedEetwensId : null;
+        $selectedEetwensId = $selectedEetwensId !== null
+            ? (int) $selectedEetwensId
+            : null;
 
         try {
             if (! $gebruiker instanceof Gebruiker) {
@@ -44,7 +53,7 @@ class VoedselpakketOverzichtController extends Controller
                 $feedbackMessage = 'Er zijn geen gezinnen bekent die de geselecteerde eetwens hebben';
             }
 
-            Log::channel('voedselpakket')->info('Overzicht voedselpakketten geladen.', [
+            Log::info('Overzicht voedselpakketten geladen.', [
                 'gebruiker_id' => $gebruiker->Id,
                 'eetwens_id' => $selectedEetwensId,
                 'aantal_gezinnen' => $gezinnen->count(),
@@ -58,17 +67,19 @@ class VoedselpakketOverzichtController extends Controller
                 'feedbackMessage' => $feedbackMessage,
             ]);
         } catch (AuthorizationException $exception) {
-            Log::channel('voedselpakket')->warning('Toegang geweigerd op overzicht voedselpakketten.', [
+            Log::warning('Toegang geweigerd op overzicht voedselpakketten.', [
                 'gebruiker_id' => $gebruiker?->Id,
                 'reden' => $exception->getMessage(),
             ]);
 
             abort(403, $exception->getMessage());
         } catch (Throwable $exception) {
-            Log::channel('voedselpakket')->error('Fout bij ophalen overzicht voedselpakketten.', [
+            Log::error('Fout bij ophalen overzicht voedselpakketten.', [
                 'gebruiker_id' => $gebruiker?->Id,
                 'eetwens_id' => $selectedEetwensId,
                 'error' => $exception->getMessage(),
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
             ]);
 
             return view('voedselpakketten.index', [

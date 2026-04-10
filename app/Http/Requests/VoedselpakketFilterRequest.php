@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use App\Models\Gebruiker;
@@ -24,16 +26,6 @@ class VoedselpakketFilterRequest extends FormRequest
                     Rule::exists('Eetwens', 'Id')->where(static function ($query) {
                         $query->where('IsActief', 1);
                     }),
-                ],
-            ];
-        }
-
-        if (Schema::hasTable('wens_allergies')) {
-            return [
-                'eetwens_id' => [
-                    'nullable',
-                    'integer',
-                    Rule::exists('wens_allergies', 'id'),
                 ],
             ];
         }

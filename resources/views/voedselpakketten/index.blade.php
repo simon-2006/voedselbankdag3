@@ -1,40 +1,61 @@
 @extends('layouts.app')
 
-@section('title', 'Overzicht voedselpakketten | Voedselbank Samen')
+@section('title', 'Overzicht voedselpakketten | Voedselbank Maaskantje')
 
 @section('content')
-    <section class="card border-0 shadow-lg p-4 p-lg-5 reveal">
-        @if (! empty($feedbackMessage) && ($feedbackType ?? null) === 'danger')
-            <div class="alert alert-{{ $feedbackType ?? 'info' }} shadow-sm mb-4" role="alert">
-                {{ $feedbackMessage }}
-            </div>
-        @endif
+    <section class="card border-0 shadow-lg p-4 p-lg-5">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
+            <h1 class="h2 mb-0 text-success">
+                Overzicht gezinnen met voedselpakketten
+            </h1>
 
-        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-3">
-            <h1 class="h2 mb-0 overview-heading">Overzicht gezinnen met voedselpakketten</h1>
-
-            <form method="GET" action="{{ route('voedselpakketten.index') }}" class="d-flex flex-column flex-sm-row gap-2 overzicht-filter-form" id="overzichtFilterForm" novalidate>
+            <form
+                method="GET"
+                action="{{ route('voedselpakketten.index') }}"
+                class="d-flex flex-column flex-sm-row gap-2"
+                id="overzichtFilterForm"
+                novalidate
+            >
                 <label for="eetwens_id" class="visually-hidden">Selecteer Eetwens</label>
-                <select name="eetwens_id" id="eetwens_id" class="form-select @error('eetwens_id') is-invalid @enderror" aria-label="Selecteer Eetwens">
+
+                <select
+                    name="eetwens_id"
+                    id="eetwens_id"
+                    class="form-select @error('eetwens_id') is-invalid @enderror"
+                    aria-label="Selecteer Eetwens"
+                >
                     <option value="">Selecteer Eetwens</option>
+
                     @foreach ($eetwensen as $eetwens)
-                        <option value="{{ $eetwens->Id }}" @selected((string) $selectedEetwensId === (string) $eetwens->Id)>
+                        <option
+                            value="{{ $eetwens->Id }}"
+                            @selected((string) $selectedEetwensId === (string) $eetwens->Id)
+                        >
                             {{ $eetwens->Naam }}
                         </option>
                     @endforeach
                 </select>
-                <div class="invalid-feedback" id="eetwensClientFeedback">
-                    De geselecteerde eetwens is ongeldig.
-                </div>
-                @error('eetwens_id')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-                <button type="submit" class="btn btn-secondary fw-semibold px-3">Toon Gezinnen</button>
+
+                <button type="submit" class="btn btn-secondary fw-semibold px-3">
+                    Toon Gezinnen
+                </button>
             </form>
         </div>
 
+        @error('eetwens_id')
+            <div class="alert alert-danger mb-4" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
+
+        @if (! empty($feedbackMessage) && ! empty($feedbackType))
+            <div class="alert alert-{{ $feedbackType }} shadow-sm mb-4" role="alert">
+                {{ $feedbackMessage }}
+            </div>
+        @endif
+
         <div class="table-responsive">
-            <table class="table table-sm align-middle mb-0 overzicht-table">
+            <table class="table table-sm align-middle mb-0">
                 <thead>
                     <tr>
                         <th scope="col">Gezinsnaam</th>
@@ -46,6 +67,7 @@
                         <th scope="col" class="text-center">Voedselpakket Details</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     @if ($gezinnen->isNotEmpty())
                         @foreach ($gezinnen as $gezin)
@@ -55,9 +77,15 @@
                                 <td>{{ $gezin->AantalVolwassenen }}</td>
                                 <td>{{ $gezin->AantalKinderen }}</td>
                                 <td>{{ $gezin->AantalBabys }}</td>
-                                <td>{{ $gezin->Vertegenwoordiger !== '' ? $gezin->Vertegenwoordiger : 'Onbekend' }}</td>
+                                <td>
+                                    {{ trim($gezin->Vertegenwoordiger) !== '' ? $gezin->Vertegenwoordiger : 'Onbekend' }}
+                                </td>
                                 <td class="text-center">
-                                    <span class="detail-icon" title="{{ $gezin->AantalPakketten }} pakket(ten), {{ $gezin->TotaalProductEenheden }} producteenheden">□</span>
+                                    <span
+                                        title="{{ $gezin->AantalPakketten }} pakket(ten), {{ $gezin->TotaalProductEenheden }} producteenheden"
+                                    >
+                                        □
+                                    </span>
                                 </td>
                             </tr>
                         @endforeach
@@ -81,14 +109,16 @@
         </div>
 
         <div class="d-flex justify-content-end mt-3">
-            <a href="{{ route('home') }}" class="btn btn-primary btn-sm px-3">home</a>
+            <a href="{{ route('home') }}" class="btn btn-primary btn-sm px-3">
+                home
+            </a>
         </div>
     </section>
 @endsection
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('overzichtFilterForm');
             const select = document.getElementById('eetwens_id');
 
@@ -96,9 +126,13 @@
                 return;
             }
 
-            const allowedValues = new Set(Array.from(select.options).map(option => option.value));
+            const allowedValues = new Set(
+                Array.from(select.options).map(function (option) {
+                    return option.value;
+                })
+            );
 
-            form.addEventListener('submit', (event) => {
+            form.addEventListener('submit', function (event) {
                 if (!allowedValues.has(select.value)) {
                     event.preventDefault();
                     select.classList.add('is-invalid');
