@@ -84,7 +84,7 @@
                                     <span
                                         title="{{ $gezin->AantalPakketten }} pakket(ten), {{ $gezin->TotaalProductEenheden }} producteenheden"
                                     >
-                                        □
+                                        Details
                                     </span>
                                 </td>
                             </tr>
