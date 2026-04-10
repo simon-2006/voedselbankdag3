@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VoorraadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AllergieController;
+use App\Http\Controllers\LeverancierController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VoedselpakketOverzichtController;
 
 
@@ -40,6 +42,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/gezinsallergieen/gezin/{gezin}', [AllergieController::class, 'showGezin'])->name('allergie.gezin');
     Route::get('/gezinsallergieen/gezin/{gezin}/persoon/{persoon}/wijzig', [AllergieController::class, 'edit'])->name('allergie.edit');
     Route::post('/gezinsallergieen/gezin/{gezin}/persoon/{persoon}/wijzig', [AllergieController::class, 'update'])->name('allergie.update');
+
+    Route::get('/leverancier', [LeverancierController::class, 'index'])->name('leverancier.index');
+    Route::get('/leverancier/{leverancierId}/producten', [ProductController::class, 'getProductenByLeverancier'])->name('leverancier.producten');
+    Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
+
+    Route::get('/leverancier', [LeverancierController::class, 'index'])->name('leverancier.index');
+    Route::get('/leverancier/{leverancierId}/producten', [ProductController::class, 'getProductenByLeverancier'])->name('leverancier.producten');
+    Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
 
     Route::get('/voedselpakketten', [VoedselpakketOverzichtController::class, 'index'])->name('voedselpakketten.index');
     Route::get('/voedselpakketten/gezin/{gezin}', [VoedselpakketOverzichtController::class, 'showGezin'])->name('voedselpakketten.gezin.show');

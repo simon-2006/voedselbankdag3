@@ -15,9 +15,14 @@
                     <a href="{{ route('home') }}" class="nav-link fw-semibold {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                 </li>
 
+                
+
                 @auth
                     <li class="nav-item">
                         <a href="{{ route('allergie.index') }}" class="nav-link fw-semibold {{ request()->routeIs('allergie.*') ? 'active' : '' }}">Allergieën</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('leverancier.index') }}" class="nav-link fw-semibold {{ request()->routeIs('leverancier.*') ? 'active' : '' }}">Leveranciers</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('dashboard') }}" class="nav-link fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
