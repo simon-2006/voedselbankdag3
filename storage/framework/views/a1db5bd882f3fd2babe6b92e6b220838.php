@@ -17,7 +17,16 @@
 
                 <?php if(auth()->guard()->check()): ?>
                     <li class="nav-item">
+                        <a href="<?php echo e(route('allergie.index')); ?>" class="nav-link fw-semibold <?php echo e(request()->routeIs('allergie.*') ? 'active' : ''); ?>">Allergieën</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?php echo e(route('dashboard')); ?>" class="nav-link fw-semibold <?php echo e(request()->routeIs('dashboard') ? 'active' : ''); ?>">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo e(route('voedselpakketten.index')); ?>" class="nav-link fw-semibold <?php echo e(request()->routeIs('voedselpakketten.*') ? 'active' : ''); ?>">Overzicht voedselpakketten</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo e(route('voorraad.index')); ?>" class="nav-link fw-semibold <?php echo e(request()->routeIs('voorraad.*') ? 'active' : ''); ?>">Overzicht Productvoorraden</a>
                     </li>
                     <li class="nav-item mt-2 mt-lg-0">
                         <form method="POST" action="<?php echo e(route('logout')); ?>">

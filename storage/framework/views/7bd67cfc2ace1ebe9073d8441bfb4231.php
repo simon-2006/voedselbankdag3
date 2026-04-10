@@ -1,3 +1,5 @@
+﻿
+
 <?php $__env->startSection('title', 'Voedselbank Samen | Iedereen verdient een volle tafel'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -52,7 +54,7 @@
             <div class="card border-0 shadow-sm h-100 card-lift">
                 <div class="card-body p-4">
                     <h3 class="h4 mb-2">Donaties</h3>
-                    <p class="text-secondary mb-0">Lever houdbare producten in of steun met een financi�le bijdrage.</p>
+                    <p class="text-secondary mb-0">Lever houdbare producten in of steun met een financiële bijdrage.</p>
                 </div>
             </div>
         </article>
@@ -67,5 +69,6 @@
         </article>
     </section>
 <?php $__env->stopSection(); ?>
+
 
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\odaib\Herd\vodselbank-op-1-dag-\resources\views/home.blade.php ENDPATH**/ ?>

@@ -58,7 +58,7 @@
             <table class="table table-sm align-middle mb-0">
                 <thead>
                     <tr>
-                        <th scope="col">Gezinsnaam</th>
+                        <th scope="col">Naam</th>
                         <th scope="col">Omschrijving</th>
                         <th scope="col">Volwassenen</th>
                         <th scope="col">Kinderen</th>
@@ -81,11 +81,17 @@
                                     {{ trim($gezin->Vertegenwoordiger) !== '' ? $gezin->Vertegenwoordiger : 'Onbekend' }}
                                 </td>
                                 <td class="text-center">
-                                    <span
+                                    <a
+                                        href="{{ route('voedselpakketten.gezin.show', ['gezin' => $gezin->GezinId]) }}"
+                                        class="icon-link"
                                         title="{{ $gezin->AantalPakketten }} pakket(ten), {{ $gezin->TotaalProductEenheden }} producteenheden"
+                                        aria-label="Bekijk voedselpakket details voor {{ $gezin->Gezinsnaam }}"
                                     >
-                                        Details
-                                    </span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                                            <path d="M8.5 1.25a.75.75 0 0 0-1 0l-5.5 4.4A.75.75 0 0 0 1.75 6.9v6.35c0 .83.67 1.5 1.5 1.5h9.5c.83 0 1.5-.67 1.5-1.5V6.9a.75.75 0 0 0-.25-.57l-5.5-5.08Zm-5.25 5.9L8 2.84l4.75 4.3v6.1h-9.5v-6.1Z"/>
+                                            <path d="M5 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Z"/>
+                                        </svg>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -93,7 +99,7 @@
                         <tr>
                             <td colspan="7" class="p-0 border-0">
                                 <div class="alert alert-warning m-2 mb-0" role="alert">
-                                    Er zijn geen gezinnen bekent die de geselecteerde eetwens hebben
+                                    Er zijn geen gezinnen bekend die de geselecteerde eetwens hebben
                                 </div>
                             </td>
                         </tr>
