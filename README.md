@@ -31,6 +31,12 @@ php artisan migrate
 composer run dev
 ```
 
+5. (Optioneel voor User Story Leveranciers) voer de stored procedures uit:
+
+```bash
+mysql -u root -p voedselbank_maaskantje < database/stored-procedures/leverancier_overzicht.sql
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

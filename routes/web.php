@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VoedselpakketOverzichtController;
+use App\Http\Controllers\LeverancierController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/leveranciers', [LeverancierController::class, 'index'])->name('leveranciers.index');
 
     Route::get('/overzicht-voedselpakketten', [VoedselpakketOverzichtController::class, 'index'])
         ->name('voedselpakketten.index');
