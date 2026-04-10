@@ -307,3 +307,18 @@ h4,
 .icon-link:hover {
     color: #195de8;
 }
+
+.allergie-filter-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+@media (max-width: 767.98px) {
+    .allergie-filter-form {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}

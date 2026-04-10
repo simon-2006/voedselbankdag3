@@ -7,7 +7,7 @@
         <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-3">
             <h1 class="wireframe-title m-0">Overzicht gezinnen met allergieën</h1>
 
-            <form method="GET" action="{{ route('allergie.index') }}" class="d-flex flex-wrap gap-2">
+            <form method="GET" action="{{ route('allergie.index') }}" class="allergie-filter-form ms-auto">
                 <select name="allergie_id" class="form-select wireframe-select">
                     <option value="0">Selecteer Allergie</option>
                     @foreach ($allergieen as $allergie)

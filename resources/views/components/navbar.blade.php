@@ -17,6 +17,9 @@
 
                 @auth
                     <li class="nav-item">
+                        <a href="{{ route('allergie.index') }}" class="nav-link fw-semibold {{ request()->routeIs('allergie.*') ? 'active' : '' }}">Allergieën</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('dashboard') }}" class="nav-link fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
                     </li>
                     <li class="nav-item mt-2 mt-lg-0">
