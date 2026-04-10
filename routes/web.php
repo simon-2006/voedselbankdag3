@@ -42,5 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/gezinsallergieen/gezin/{gezin}/persoon/{persoon}/wijzig', [AllergieController::class, 'update'])->name('allergie.update');
 
     Route::get('/voedselpakketten', [VoedselpakketOverzichtController::class, 'index'])->name('voedselpakketten.index');
+    Route::get('/voedselpakketten/gezin/{gezin}', [VoedselpakketOverzichtController::class, 'showGezin'])->name('voedselpakketten.gezin.show');
+    Route::get('/voedselpakketten/{voedselpakket}/wijzig-status', [VoedselpakketOverzichtController::class, 'editStatus'])->name('voedselpakketten.status.edit');
+    Route::put('/voedselpakketten/{voedselpakket}/wijzig-status', [VoedselpakketOverzichtController::class, 'updateStatus'])->name('voedselpakketten.status.update');
 
 });

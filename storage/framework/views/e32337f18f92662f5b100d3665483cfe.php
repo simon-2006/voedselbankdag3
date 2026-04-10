@@ -17,6 +17,7 @@
                     <li><a href="<?php echo e(route('home')); ?>">Homepage</a></li>
                     <?php if(auth()->guard()->check()): ?>
                         <li><a href="<?php echo e(route('dashboard')); ?>">Mijn dashboard</a></li>
+                        <li><a href="<?php echo e(route('voedselpakketten.index')); ?>">Overzicht voedselpakketten</a></li>
                     <?php else: ?>
                         <li><a href="<?php echo e(route('login')); ?>">Inloggen</a></li>
                         <li><a href="<?php echo e(route('register')); ?>">Registreren</a></li>

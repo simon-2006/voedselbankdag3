@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (config('database.default') !== 'mysql') {
+            return;
+        }
+
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_allergie_overzicht_allergieen');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_allergie_overzicht_gezinnen');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_allergie_gezin_samenvatting');
@@ -204,6 +208,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (config('database.default') !== 'mysql') {
+            return;
+        }
+
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_allergie_wijzig_persoon');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_allergie_persoon_huidige_allergie');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_allergie_gezin_personen');

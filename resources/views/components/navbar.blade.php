@@ -23,7 +23,7 @@
                         <a href="{{ route('dashboard') }}" class="nav-link fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('voedselpakketten.index') }}" class="nav-link fw-semibold {{ request()->routeIs('voedselpakketten.index') ? 'active' : '' }}">Overzicht voedselpakketten</a>
+                        <a href="{{ route('voedselpakketten.index') }}" class="nav-link fw-semibold {{ request()->routeIs('voedselpakketten.*') ? 'active' : '' }}">Overzicht voedselpakketten</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('voorraad.index') }}" class="nav-link fw-semibold {{ request()->routeIs('voorraad.*') ? 'active' : '' }}">Overzicht Productvoorraden</a>

@@ -1,0 +1,59 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+  <diagram id="erd-us04" name="ERD UserStory04">
+    <mxGraphModel dx="1042" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;Gezin&lt;/b&gt;&lt;br&gt;PK Id&lt;br&gt;Naam&lt;br&gt;Omschrijving&lt;br&gt;AantalVolwassenen&lt;br&gt;AantalKinderen&lt;br&gt;AantalBabys&lt;br&gt;TotaalAantalPersonen&lt;br&gt;IsActief" vertex="1">
+          <mxGeometry height="190" width="250" x="80" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Persoon&lt;/b&gt;&lt;br&gt;PK Id&lt;br&gt;FK GezinId&lt;br&gt;Voornaam&lt;br&gt;Tussenvoegsel&lt;br&gt;Achternaam&lt;br&gt;IsVertegenwoordiger&lt;br&gt;IsActief" vertex="1">
+          <mxGeometry height="170" width="250" x="80" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;EetwensPerGezin&lt;/b&gt;&lt;br&gt;PK Id&lt;br&gt;FK GezinId&lt;br&gt;FK EetwensId&lt;br&gt;IsActief" vertex="1">
+          <mxGeometry height="150" width="250" x="420" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;Eetwens&lt;/b&gt;&lt;br&gt;PK Id&lt;br&gt;Naam&lt;br&gt;Omschrijving&lt;br&gt;IsActief" vertex="1">
+          <mxGeometry height="130" width="230" x="760" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="&lt;b&gt;Voedselpakket&lt;/b&gt;&lt;br&gt;PK Id&lt;br&gt;FK GezinId&lt;br&gt;PakketNummer&lt;br&gt;DatumSamenstelling&lt;br&gt;DatumUitgifte&lt;br&gt;Status&lt;br&gt;IsActief" vertex="1">
+          <mxGeometry height="170" width="250" x="420" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;ProductPerVoedselPakket&lt;/b&gt;&lt;br&gt;PK Id&lt;br&gt;FK VoedselpakketId&lt;br&gt;ProductId&lt;br&gt;AantalProductEenheden&lt;br&gt;IsActief" vertex="1">
+          <mxGeometry height="160" width="260" x="760" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="30" edge="1" parent="1" source="10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.4;" target="11" value="1..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="31" edge="1" parent="1" source="10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.4;" target="12" value="1..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="32" edge="1" parent="1" source="12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.4;" target="13" value="*..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="33" edge="1" parent="1" source="10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.4;" target="14" value="1..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="34" edge="1" parent="1" source="14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.4;" target="15" value="1..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bHHOW2ycU2IeWb-1H7FZ-34" parent="1" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;" value="Gezin" vertex="1">
+          <mxGeometry height="60" width="180" x="90" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="bHHOW2ycU2IeWb-1H7FZ-35" parent="bHHOW2ycU2IeWb-1H7FZ-34" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" value="" vertex="1">
+          <mxGeometry height="30" width="180" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bHHOW2ycU2IeWb-1H7FZ-36" parent="bHHOW2ycU2IeWb-1H7FZ-35" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;whiteSpace=wrap;html=1;" value="PK" vertex="1">
+          <mxGeometry height="30" width="30" as="geometry">
+            <mxRectangle height="30" width="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bHHOW2ycU2IeWb-1H7FZ-37" parent="bHHOW2ycU2IeWb-1H7FZ-35" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;whiteSpace=wrap;html=1;" value="Id" vertex="1">
+          <mxGeometry height="30" width="150" x="30" as="geometry">
+            <mxRectangle height="30" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
