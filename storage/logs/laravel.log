@@ -4694,3 +4694,19 @@
 [2026-04-10 13:10:20] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
 [2026-04-10 13:10:32] local.INFO: Voedselpakket details per gezin geladen. {"gebruiker_id":1,"gezin_id":2,"aantal_voedselpakketten":3} 
 [2026-04-10 13:10:41] local.INFO: Statusformulier voedselpakket geladen. {"gebruiker_id":1,"voedselpakket_id":6,"is_geblokkeerd":false} 
+[2026-04-10 13:22:51] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 13:22:53] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 13:36:39] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 13:36:47] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":1,"aantal_gezinnen":0} 
+[2026-04-10 13:36:47] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":1,"aantal_gezinnen":0} 
+[2026-04-10 13:36:49] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":1,"aantal_gezinnen":0} 
+[2026-04-10 13:37:06] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 13:37:20] local.INFO: Voedselpakket details per gezin geladen. {"gebruiker_id":1,"gezin_id":2,"aantal_voedselpakketten":3} 
+[2026-04-10 13:37:24] local.INFO: Statusformulier voedselpakket geladen. {"gebruiker_id":1,"voedselpakket_id":6,"is_geblokkeerd":false} 
+[2026-04-10 13:37:35] local.INFO: Status voedselpakket gewijzigd. {"gebruiker_id":1,"voedselpakket_id":6,"oude_status":"Uitgereikt","nieuwe_status":"NietUitgereikt"} 
+[2026-04-10 13:37:35] local.INFO: Statusformulier voedselpakket geladen. {"gebruiker_id":1,"voedselpakket_id":6,"is_geblokkeerd":false} 
+[2026-04-10 13:37:39] local.INFO: Voedselpakket details per gezin geladen. {"gebruiker_id":1,"gezin_id":2,"aantal_voedselpakketten":3} 
+[2026-04-10 13:37:48] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-10 13:37:52] local.INFO: Voedselpakket details per gezin geladen. {"gebruiker_id":1,"gezin_id":1,"aantal_voedselpakketten":3} 
+[2026-04-10 13:37:58] local.INFO: Statusformulier voedselpakket geladen. {"gebruiker_id":1,"voedselpakket_id":3,"is_geblokkeerd":true} 
+[2026-04-10 13:38:11] local.INFO: Voedselpakket details per gezin geladen. {"gebruiker_id":1,"gezin_id":1,"aantal_voedselpakketten":3} 
