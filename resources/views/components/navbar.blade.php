@@ -25,6 +25,9 @@
                     <li class="nav-item">
                         <a href="{{ route('voedselpakketten.index') }}" class="nav-link fw-semibold {{ request()->routeIs('voedselpakketten.index') ? 'active' : '' }}">Overzicht voedselpakketten</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('voorraad.index') }}" class="nav-link fw-semibold {{ request()->routeIs('voorraad.*') ? 'active' : '' }}">Overzicht Productvoorraden</a>
+                    </li>
                     <li class="nav-item mt-2 mt-lg-0">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
