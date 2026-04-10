@@ -36,7 +36,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/uitloggen', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/allergieen', [AllergieController::class, 'index'])->name('allergie.index');
+    Route::get('/gezinsallergieen', [AllergieController::class, 'index'])->name('allergie.index');
+    Route::get('/gezinsallergieen/gezin/{gezin}', [AllergieController::class, 'showGezin'])->name('allergie.gezin');
+    Route::get('/gezinsallergieen/gezin/{gezin}/persoon/{persoon}/wijzig', [AllergieController::class, 'edit'])->name('allergie.edit');
+    Route::post('/gezinsallergieen/gezin/{gezin}/persoon/{persoon}/wijzig', [AllergieController::class, 'update'])->name('allergie.update');
 
     Route::get('/voedselpakketten', [VoedselpakketOverzichtController::class, 'index'])->name('voedselpakketten.index');
 

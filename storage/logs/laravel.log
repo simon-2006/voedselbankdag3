@@ -4016,3 +4016,5 @@
 #58 C:/Program Files/Herd/resources/app.asar.unpacked/resources/valet/server.php(139): require('C://Proef examen...')
 #59 {main}
 "} 
+[2026-04-10 11:47:16] local.ERROR: Fout bij ophalen overzicht voedselpakketten. {"gebruiker_id":1,"eetwens_id":null,"error":"SQLSTATE[42000]: Syntax error or access violation: 1305 PROCEDURE voedselbank_maaskantje_dag_na_dag_2.sp_is_manager does not exist","file":"C:\\projects2025\\vodselbank-op-1-dag-\\app\\Services\\VoedselpakketOverzichtService.php","line":25} 
+[2026-04-10 11:48:54] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
