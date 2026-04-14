@@ -31,46 +31,67 @@ class LeverancierController extends Controller
 
         // Eis 3: Try Catch
         try {
-            // Eis 2: Joins (Verplicht onderdeel van het examen)
-            $query = DB::table('Leverancier as l')
-                ->leftJoin('ContactPerLeverancier as cpl', 'cpl.LeverancierId', '=', 'l.Id')
-                ->leftJoin('Contact as c', 'c.Id', '=', 'cpl.ContactId')
-                ->where('l.IsActief', 1)
-                ->select(
-                    'l.Id',
-                    'l.Naam',
-                    'l.ContactPersoon',
-                    'l.LeverancierNummer',
-                    'l.LeverancierType',
-                    DB::raw('MAX(c.Email) as Email'),
-                    DB::raw('MAX(c.Mobiel) as Mobiel')
-                )
-                ->groupBy('l.Id', 'l.Naam', 'l.ContactPersoon', 'l.LeverancierNummer', 'l.LeverancierType')
-                ->orderBy('l.Naam');
+            // Scenario 2 (US_07): Donor hoort geen leveranciers/producten te tonen in dit overzicht.
+            if ($selectedType === 'Donor') {
+                $leveranciers = collect();
+                $toonLegeMelding = true;
+            } else {
+                // Eis 2: Joins (Verplicht onderdeel van het examen)
+                $query = DB::table('Leverancier as l')
+                    ->leftJoin('ContactPerLeverancier as cpl', 'cpl.LeverancierId', '=', 'l.Id')
+                    ->leftJoin('Contact as c', 'c.Id', '=', 'cpl.ContactId')
+                    ->where('l.IsActief', 1)
+                    // Donor wordt in dit leveranciersoverzicht niet getoond.
+                    ->where('l.LeverancierType', '!=', 'Donor')
+                    ->select(
+                        'l.Id',
+                        'l.Naam',
+                        'l.ContactPersoon',
+                        'l.LeverancierNummer',
+                        'l.LeverancierType',
+                        DB::raw('MAX(c.Email) as Email'),
+                        DB::raw('MAX(c.Mobiel) as Mobiel')
+                    )
+                    ->groupBy('l.Id', 'l.Naam', 'l.ContactPersoon', 'l.LeverancierNummer', 'l.LeverancierType')
+                    ->orderBy('l.Naam');
 
-            // Filter toepassen als er een type is geselecteerd
-            if ($selectedType !== null) {
-                $query->where('l.LeverancierType', $selectedType);
+                // Filter toepassen als er een type is geselecteerd
+                if ($selectedType !== null) {
+                    $query->where('l.LeverancierType', $selectedType);
+                }
+
+                $leveranciers = $query->get();
+                $toonLegeMelding = ($selectedType !== null && $leveranciers->isEmpty());
             }
-
-            $leveranciers = $query->get();
-
-            // Scenario 2 (US_07): Lege melding tonen als er geen leveranciers zijn
-            $toonLegeMelding = ($selectedType !== null && $leveranciers->isEmpty());
 
             return view('leverancier.index', [
                 'leveranciers' => $leveranciers,
                 'types' => $types,
                 'geselecteerdeType' => $selectedType,
-                'toonLegeMelding' => $toonLegeMelding
+                'toonLegeMelding' => $toonLegeMelding,
+                'feedbackType' => null,
+                'feedbackMessage' => null,
+                'overzichtBeschikbaar' => true,
             ]);
 
         } catch (Exception $e) {
             // Eis 11: Technische log
-            Log::error("Fout bij ophalen leveranciers overzicht: " . $e->getMessage());
-            
-            // Eis 12: Terugkoppeling acties
-            return redirect()->route('home')->with('error_melding', 'Er is een fout opgetreden bij het laden van de leveranciers.');
+            Log::error('Fout bij ophalen leveranciers overzicht.', [
+                'gebruiker_id' => auth()->id(),
+                'leverancier_type' => $selectedType,
+                'error' => $e->getMessage(),
+            ]);
+
+            // Scenario_03 (US_07): Technisch foutscenario met duidelijke terugkoppeling
+            return response()->view('leverancier.index', [
+                'leveranciers' => collect(),
+                'types' => $types,
+                'geselecteerdeType' => $selectedType,
+                'toonLegeMelding' => false,
+                'feedbackType' => 'danger',
+                'feedbackMessage' => 'Het overzicht van leveranciers is tijdelijk niet beschikbaar. Probeer het later opnieuw.',
+                'overzichtBeschikbaar' => false,
+            ], 503);
         }
     }
 

@@ -65,17 +65,17 @@
                         <div class="col-12 col-md-5">
                             {{-- Eis 9: Client-side validatie (required) --}}
                             <input type="date" 
-                                   class="form-control" 
+                                   class="form-control @error('houdbaarheidsdatum') is-invalid @enderror" 
                                    id="houdbaarheidsdatum" 
                                    name="houdbaarheidsdatum" 
                                    required 
                                    value="{{ old('houdbaarheidsdatum', \Carbon\Carbon::parse($product->Houdbaarheidsdatum)->format('Y-m-d')) }}">
 
-                            @if (session('error_detail'))
-                                <div class="text-danger mt-2 auto-dismiss">
-                                    {{ session('error_detail') }}
+                            @error('houdbaarheidsdatum')
+                                <div class="invalid-feedback d-block mt-2">
+                                    {{ $message }}
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
 
