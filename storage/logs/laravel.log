@@ -13554,3 +13554,4 @@
 #62 C:/Program Files/Herd/resources/app.asar.unpacked/resources/valet/server.php(139): require('C://Proef examen...')
 #63 {main}
 "} 
+[2026-04-14 10:55:01] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
