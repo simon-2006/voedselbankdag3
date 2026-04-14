@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Leverancier;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Exception;
 
 class ProductController extends Controller
@@ -30,8 +32,15 @@ class ProductController extends Controller
             // Haal eerst de leverancier op voor de weergave boven de tabel
             $leverancier = Leverancier::findOrFail($leverancierId);
 
-            // Aanroepen van de Stored Procedure (Die de 4 verplichte tabellen joined)
-            $producten = DB::select('CALL sp_GetProductenPerLeverancier(?)', [$leverancierId]);
+            // Donor hoort geen productoverzicht te hebben.
+            if ((string) $leverancier->LeverancierType === 'Donor') {
+                return redirect()
+                    ->route('leverancier.index')
+                    ->with('leverancier_feedback_type', 'warning')
+                    ->with('leverancier_feedback_message', 'Voor leverancierstype Donor is geen productoverzicht beschikbaar.');
+            }
+
+            $producten = $this->haalProductenVoorLeverancierOp((int) $leverancierId);
             
             return view('product.index', compact('producten', 'leverancier'));
 
@@ -67,7 +76,10 @@ class ProductController extends Controller
     {
         // Eis 9: Server-side validatie
         $request->validate([
-            'houdbaarheidsdatum' => 'required|date'
+            'houdbaarheidsdatum' => ['required', 'date'],
+        ], [
+            'houdbaarheidsdatum.required' => 'De houdbaarheidsdatum is verplicht.',
+            'houdbaarheidsdatum.date' => 'Vul een geldige houdbaarheidsdatum in.',
         ]);
 
         // Eis 3: Try Catch
@@ -86,8 +98,10 @@ class ProductController extends Controller
 
                 return redirect()->back()
                     ->withInput()
-                    ->with('error_melding', 'De houdbaarheidsdatum is niet gewijzigd')
-                    ->with('error_detail', 'De houdbaarheidsdatum mag niet naar een eerdere datum worden gezet');
+                    ->with(
+                        'error_melding',
+                        'De houdbaarheidsdatum is niet gewijzigd. De houdbaarheidsdatum mag niet naar een eerdere datum worden gezet'
+                    );
             }
 
             // BESTAANDE Business rule: max 7 dagen verlengen (Scenario 02)
@@ -98,8 +112,10 @@ class ProductController extends Controller
                 // Eis 12: Terugkoppeling acties (Foutmelding - Wireframe 06)
                 return redirect()->back()
                     ->withInput()
-                    ->with('error_melding', 'De houdbaarheidsdatum is niet gewijzigd')
-                    ->with('error_detail', 'De houdbaarheidsdatum mag met maximaal 7 dagen worden verlengd');
+                    ->with(
+                        'error_melding',
+                        'De houdbaarheidsdatum is niet gewijzigd. De houdbaarheidsdatum mag met maximaal 7 dagen worden verlengd'
+                    );
             }
 
             // Scenario 01: Succesvol opslaan
@@ -120,5 +136,73 @@ class ProductController extends Controller
             return redirect()->back()
                 ->with('error_melding', 'Er is een onverwachte fout opgetreden. Probeer het later opnieuw.');
         }
+    }
+
+    /**
+     * Haal producten van een leverancier op met fallback als stored procedure ontbreekt.
+     */
+    private function haalProductenVoorLeverancierOp(int $leverancierId): Collection
+    {
+        try {
+            $producten = collect(DB::select('CALL sp_GetProductenPerLeverancier(?)', [$leverancierId]));
+        } catch (QueryException $exception) {
+            $melding = $exception->getMessage();
+
+            if (stripos($melding, 'does not exist') === false && stripos($melding, '1305') === false) {
+                throw $exception;
+            }
+
+            Log::warning("Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier {$leverancierId}.");
+
+            $producten = DB::table('Product as p')
+                ->join('ProductPerLeverancier as ppl', 'ppl.ProductId', '=', 'p.Id')
+                ->join('Leverancier as l', 'l.Id', '=', 'ppl.LeverancierId')
+                ->leftJoin('ContactPerLeverancier as cpl', 'cpl.LeverancierId', '=', 'l.Id')
+                ->leftJoin('Contact as c', 'c.Id', '=', 'cpl.ContactId')
+                ->where('ppl.LeverancierId', $leverancierId)
+                ->where('p.IsActief', 1)
+                ->select(
+                    'p.Id',
+                    'p.Naam',
+                    'p.SoortAllergie',
+                    'p.Barcode',
+                    'p.Houdbaarheidsdatum',
+                    'l.Naam as LeverancierNaam',
+                    'l.LeverancierNummer',
+                    'l.LeverancierType',
+                    DB::raw('MAX(c.Email) as ContactEmail')
+                )
+                ->groupBy(
+                    'p.Id',
+                    'p.Naam',
+                    'p.SoortAllergie',
+                    'p.Barcode',
+                    'p.Houdbaarheidsdatum',
+                    'l.Naam',
+                    'l.LeverancierNummer',
+                    'l.LeverancierType'
+                )
+                ->orderBy('p.Naam')
+                ->get();
+        }
+
+        return $producten->map(function (object $product): object {
+            $product->IsBijnaVerlopen = false;
+            $product->DagenTotHoudbaarheidsdatum = null;
+
+            try {
+                $dagenTotHoudbaarheidsdatum = Carbon::today()->diffInDays(
+                    Carbon::parse((string) $product->Houdbaarheidsdatum),
+                    false
+                );
+
+                $product->DagenTotHoudbaarheidsdatum = $dagenTotHoudbaarheidsdatum;
+                $product->IsBijnaVerlopen = $dagenTotHoudbaarheidsdatum >= 0 && $dagenTotHoudbaarheidsdatum <= 2;
+            } catch (Exception) {
+                // Laat waarschuwing uit als datum niet parsebaar is.
+            }
+
+            return $product;
+        });
     }
 }

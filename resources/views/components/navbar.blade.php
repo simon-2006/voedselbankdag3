@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg app-navbar sticky-top shadow-sm reveal">
+﻿<nav class="navbar navbar-expand-lg app-navbar sticky-top shadow-sm reveal">
     <div class="container py-2">
         <a href="{{ route('home') }}" class="navbar-brand fw-bold d-flex align-items-center gap-2" aria-label="Ga naar de homepage">
             <img src="{{ asset('images/voedselbank-symbool.svg') }}" alt="Symbool van Voedselbank Samen" class="brand-symbol">
@@ -15,14 +15,13 @@
                     <a href="{{ route('home') }}" class="nav-link fw-semibold {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                 </li>
 
-                
+                <li class="nav-item">
+                    <a href="{{ route('leverancier.index') }}" class="nav-link fw-semibold {{ request()->routeIs('leverancier.*') ? 'active' : '' }}">Leveranciers</a>
+                </li>
 
                 @auth
                     <li class="nav-item">
-                        <a href="{{ route('allergie.index') }}" class="nav-link fw-semibold {{ request()->routeIs('allergie.*') ? 'active' : '' }}">Allergieën</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('leverancier.index') }}" class="nav-link fw-semibold {{ request()->routeIs('leverancier.*') ? 'active' : '' }}">Leveranciers</a>
+                        <a href="{{ route('allergie.index') }}" class="nav-link fw-semibold {{ request()->routeIs('allergie.*') ? 'active' : '' }}">Allergieen</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('dashboard') }}" class="nav-link fw-semibold {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>

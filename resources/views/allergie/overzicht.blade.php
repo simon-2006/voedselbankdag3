@@ -9,7 +9,7 @@
 
             <form method="GET" action="{{ route('allergie.index') }}" class="allergie-filter-form ms-auto">
                 <select name="allergie_id" class="form-select wireframe-select">
-                    <option value="0">Selecteer Allergie</option>
+                    <option value="0">Selecteer alle allergieen</option>
                     @foreach ($allergieen as $allergie)
                         <option value="{{ $allergie->Id }}" @selected((int) $geselecteerdeAllergieId === (int) $allergie->Id)>
                             {{ $allergie->Naam }}
