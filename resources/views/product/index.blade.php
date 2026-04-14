@@ -39,16 +39,24 @@
                                 <th>Soort Allergie</th>
                                 <th>Barcode</th>
                                 <th>Houdbaarheidsdatum</th>
+                                <th>Waarschuwing</th>
                                 <th class="text-center">Wijzig Product</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($producten as $product)
-                                <tr>
+                                <tr @class(['table-warning' => $product->IsBijnaVerlopen])>
                                     <td>{{ $product->Naam }}</td>
                                     <td>{{ $product->SoortAllergie ?? 'Geen' }}</td>
                                     <td>{{ $product->Barcode }}</td>
                                     <td>{{ $product->Houdbaarheidsdatum }}</td>
+                                    <td>
+                                        @if ($product->IsBijnaVerlopen)
+                                            <span class="badge text-bg-warning">Bijna verlopen ({{ $product->DagenTotHoudbaarheidsdatum }} dagen)</span>
+                                        @else
+                                            <span class="text-muted">Geen waarschuwing</span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         {{-- Link naar het formulier om de datum aan te passen --}}
                                         <a href="{{ route('product.edit', $product->Id) }}" class="icon-link" title="Wijzig product">
@@ -61,7 +69,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center text-muted">Geen producten gevonden voor deze leverancier.</td>
+                                    <td colspan="6" class="text-center text-muted">Geen producten gevonden voor deze leverancier.</td>
                                 </tr>
                             @endforelse
                         </tbody>
