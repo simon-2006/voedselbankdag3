@@ -74,7 +74,7 @@
             </div>
 
             <div class="d-flex justify-content-end mt-3">
-                <a href="{{ route('dashboard') }}" class="btn btn-primary text-white">Home</a>
+                <a href="{{ route('home') }}" class="btn btn-primary text-white">Home</a>
             </div>
         </div>
     </section>
