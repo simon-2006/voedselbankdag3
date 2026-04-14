@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg app-navbar sticky-top shadow-sm reveal">
+﻿<nav class="navbar navbar-expand-lg app-navbar sticky-top shadow-sm reveal">
     <div class="container py-2">
         <a href="<?php echo e(route('home')); ?>" class="navbar-brand fw-bold d-flex align-items-center gap-2" aria-label="Ga naar de homepage">
             <img src="<?php echo e(asset('images/voedselbank-symbool.svg')); ?>" alt="Symbool van Voedselbank Samen" class="brand-symbol">
@@ -15,9 +15,13 @@
                     <a href="<?php echo e(route('home')); ?>" class="nav-link fw-semibold <?php echo e(request()->routeIs('home') ? 'active' : ''); ?>">Home</a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="<?php echo e(route('leverancier.index')); ?>" class="nav-link fw-semibold <?php echo e(request()->routeIs('leverancier.*') ? 'active' : ''); ?>">Leveranciers</a>
+                </li>
+
                 <?php if(auth()->guard()->check()): ?>
                     <li class="nav-item">
-                        <a href="<?php echo e(route('allergie.index')); ?>" class="nav-link fw-semibold <?php echo e(request()->routeIs('allergie.*') ? 'active' : ''); ?>">Allergieën</a>
+                        <a href="<?php echo e(route('allergie.index')); ?>" class="nav-link fw-semibold <?php echo e(request()->routeIs('allergie.*') ? 'active' : ''); ?>">Allergieen</a>
                     </li>
                     <li class="nav-item">
                         <a href="<?php echo e(route('dashboard')); ?>" class="nav-link fw-semibold <?php echo e(request()->routeIs('dashboard') ? 'active' : ''); ?>">Dashboard</a>

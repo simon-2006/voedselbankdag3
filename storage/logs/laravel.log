@@ -13087,3 +13087,19 @@
 [2026-04-10 12:35:45] local.WARNING: Gebruiker ID 1 probeerde product ID 3 met meer dan 7 dagen te verlengen.  
 [2026-04-10 13:50:48] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
 [2026-04-10 13:57:59] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-14 09:39:09] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-14 09:40:12] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 1.  
+[2026-04-14 09:40:36] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
+[2026-04-14 09:41:29] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
+[2026-04-14 09:41:54] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
+[2026-04-14 09:42:01] local.INFO: Product ID 21 succesvol verlengd tot 2026-05-13 door Gebruiker ID 1  
+[2026-04-14 09:42:04] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
+[2026-04-14 09:42:34] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 
+[2026-04-14 09:42:49] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
+[2026-04-14 09:43:32] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
+[2026-04-14 09:43:41] local.INFO: Product ID 3 succesvol verlengd tot 2026-04-15 door Gebruiker ID 1  
+[2026-04-14 09:43:44] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
+[2026-04-14 09:44:11] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
+[2026-04-14 10:05:22] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
+[2026-04-14 10:05:32] local.WARNING: Gebruiker ID 1 probeerde product ID 3 te verkorten.  
+[2026-04-14 10:05:38] local.WARNING: Stored procedure sp_GetProductenPerLeverancier ontbreekt, fallback-query wordt gebruikt voor leverancier 2.  
