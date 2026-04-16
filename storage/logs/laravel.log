@@ -13692,3 +13692,4 @@
 [stacktrace]
 #0 {main}
 "} 
+[2026-04-16 06:51:52] local.INFO: Overzicht voedselpakketten geladen. {"gebruiker_id":1,"eetwens_id":null,"aantal_gezinnen":2} 

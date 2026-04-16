@@ -111,20 +111,6 @@ unset($__errorArgs, $__bag); ?>
                                 </td>
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php elseif($selectedEetwensId !== null): ?>
-                        <tr>
-                            <td colspan="7" class="p-0 border-0">
-                                <div class="alert alert-warning m-2 mb-0" role="alert">
-                                    Er zijn geen gezinnen bekend die de geselecteerde eetwens hebben
-                                </div>
-                            </td>
-                        </tr>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="7" class="text-secondary py-4 text-center">
-                                Er zijn nog geen gezinnen met voedselpakketten gevonden.
-                            </td>
-                        </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
