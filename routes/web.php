@@ -1,0 +1,61 @@
+<?php
+
+declare(strict_types=1);
+
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VoorraadController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AllergieController;
+use App\Http\Controllers\LeverancierController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VoedselpakketOverzichtController;
+
+
+
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
+Route::middleware('guest')->group(function () {
+    Route::get('/registreren', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/registreren', [AuthController::class, 'register']);
+
+    Route::get('/inloggen', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/inloggen', [AuthController::class, 'login']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/voorraad',             [VoorraadController::class, 'index'])->name('voorraad.index');
+    Route::get('/voorraad/{id}',        [VoorraadController::class, 'show'])->name('voorraad.show');
+    Route::get('/voorraad/{id}/wijzig', [VoorraadController::class, 'edit'])->name('voorraad.edit');
+    Route::put('/voorraad/{id}',        [VoorraadController::class, 'update'])->name('voorraad.update');
+    
+    
+
+    Route::post('/uitloggen', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/gezinsallergieen', [AllergieController::class, 'index'])->name('allergie.index');
+    Route::get('/gezinsallergieen/gezin/{gezin}', [AllergieController::class, 'showGezin'])->name('allergie.gezin');
+    Route::get('/gezinsallergieen/gezin/{gezin}/persoon/{persoon}/wijzig', [AllergieController::class, 'edit'])->name('allergie.edit');
+    Route::post('/gezinsallergieen/gezin/{gezin}/persoon/{persoon}/wijzig', [AllergieController::class, 'update'])->name('allergie.update');
+
+    Route::get('/leverancier', [LeverancierController::class, 'index'])->name('leverancier.index');
+    Route::get('/leverancier/{leverancierId}/producten', [ProductController::class, 'getProductenByLeverancier'])->name('leverancier.producten');
+    Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
+
+    Route::get('/leverancier', [LeverancierController::class, 'index'])->name('leverancier.index');
+    Route::get('/leverancier/{leverancierId}/producten', [ProductController::class, 'getProductenByLeverancier'])->name('leverancier.producten');
+    Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
+
+    Route::get('/voedselpakketten', [VoedselpakketOverzichtController::class, 'index'])->name('voedselpakketten.index');
+    Route::get('/voedselpakketten/gezin/{gezin}', [VoedselpakketOverzichtController::class, 'showGezin'])->name('voedselpakketten.gezin.show');
+    Route::get('/voedselpakketten/{voedselpakket}/wijzig-status', [VoedselpakketOverzichtController::class, 'editStatus'])->name('voedselpakketten.status.edit');
+    Route::put('/voedselpakketten/{voedselpakket}/wijzig-status', [VoedselpakketOverzichtController::class, 'updateStatus'])->name('voedselpakketten.status.update');
+
+});

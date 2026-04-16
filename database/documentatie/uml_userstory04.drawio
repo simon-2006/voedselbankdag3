@@ -1,0 +1,82 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+  <diagram id="uml-userstory04-classic" name="UML UserStory04 Classic">
+    <mxGraphModel dx="1303" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="c" parent="1" style="swimlane;fontStyle=1;startSize=32;rounded=0;swimlaneFillColor=#f2f2f2;horizontal=1;childLayout=stackLayout;resizeParent=0;resizeLast=0;collapsible=0;html=1;whiteSpace=wrap;" value="VoedselpakketOverzichtController" vertex="1">
+          <mxGeometry height="210" width="370" x="460" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" parent="c" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;" value="+ overzichtService: VoedselpakketOverzichtService" vertex="1">
+          <mxGeometry height="42" width="370" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" parent="c" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;" value="+ index(request): View&lt;br/&gt;+ showGezin(id): View&lt;br/&gt;+ editStatus(id): View&lt;br/&gt;+ updateStatus(request, id): RedirectResponse" vertex="1">
+          <mxGeometry height="120" width="370" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="s" parent="1" style="swimlane;fontStyle=1;startSize=32;rounded=0;swimlaneFillColor=#f2f2f2;horizontal=1;childLayout=stackLayout;resizeParent=0;resizeLast=0;collapsible=0;html=1;whiteSpace=wrap;" value="VoedselpakketOverzichtService" vertex="1">
+          <mxGeometry height="240" width="390" x="120" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" parent="s" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;" value="- STATUS_NIET_UITGEREIKT: string&lt;br/&gt;- STATUS_UITGEREIKT: string&lt;br/&gt;- STATUS_NIET_MEER_INGESCHREVEN: string" vertex="1">
+          <mxGeometry height="90" width="390" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" parent="s" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;" value="+ getGezinnenMetVoedselpakketten(eetwensId): Collection&lt;br/&gt;+ getGezinDetails(gezinId): object&lt;br/&gt;+ getVoedselpakkettenVoorGezin(gezinId): Collection&lt;br/&gt;+ getVoedselpakketVoorStatusWijziging(id): object&lt;br/&gt;+ wijzigVoedselpakketStatus(id, status): void" vertex="1">
+          <mxGeometry height="112" width="390" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="v" parent="1" style="swimlane;fontStyle=1;startSize=32;rounded=0;swimlaneFillColor=#f2f2f2;horizontal=1;childLayout=stackLayout;resizeParent=0;resizeLast=0;collapsible=0;html=1;whiteSpace=wrap;" value="Blade View" vertex="1">
+          <mxGeometry height="200" width="340" x="980" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="v1" parent="v" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;" value="+ voedselpakketten.index.blade.php&lt;br/&gt;+ voedselpakketten.show.blade.php&lt;br/&gt;+ voedselpakketten.edit-status.blade.php" vertex="1">
+          <mxGeometry height="88" width="340" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="v2" parent="v" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;" value="+ toont meldingen, status en actieknoppen&lt;br/&gt;+ client-side validatie op statusselectie" vertex="1">
+          <mxGeometry height="72" width="340" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="r" parent="1" style="swimlane;fontStyle=1;startSize=32;rounded=0;swimlaneFillColor=#f2f2f2;horizontal=1;childLayout=stackLayout;resizeParent=0;resizeLast=0;collapsible=0;html=1;whiteSpace=wrap;" value="UpdateVoedselpakketStatusRequest" vertex="1">
+          <mxGeometry height="160" width="300" x="640" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" parent="r" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;" value="+ authorize(): bool" vertex="1">
+          <mxGeometry height="32" width="300" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" parent="r" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;" value="+ rules(): array&lt;br/&gt;status in [Uitgereikt, NietUitgereikt]" vertex="1">
+          <mxGeometry height="64" width="300" y="64" as="geometry" />
+        </mxCell>
+        <mxCell id="db" parent="1" style="swimlane;fontStyle=1;startSize=32;rounded=0;swimlaneFillColor=#f2f2f2;horizontal=1;childLayout=stackLayout;resizeParent=0;resizeLast=0;collapsible=0;html=1;whiteSpace=wrap;" value="MySQL Database" vertex="1">
+          <mxGeometry height="150" width="360" x="120" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="db1" parent="db" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;" value="+ Tabellen: Gezin, Persoon, EetwensPerGezin,&lt;br/&gt;Eetwens, Voedselpakket, ProductPerVoedselPakket" vertex="1">
+          <mxGeometry height="70" width="360" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="sp" parent="1" style="swimlane;fontStyle=1;startSize=32;rounded=0;swimlaneFillColor=#f2f2f2;horizontal=1;childLayout=stackLayout;resizeParent=0;resizeLast=0;collapsible=0;html=1;whiteSpace=wrap;" value="Stored Procedures" vertex="1">
+          <mxGeometry height="190" width="420" x="560" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="sp1" parent="sp" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;" value="+ sp_overzicht_voedselpakketten()&lt;br/&gt;+ sp_voedselpakket_gezin_details()&lt;br/&gt;+ sp_voedselpakket_overzicht_per_gezin()&lt;br/&gt;+ sp_voedselpakket_status_formulier()&lt;br/&gt;+ sp_wijzig_voedselpakket_status()" vertex="1">
+          <mxGeometry height="140" width="420" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="v" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" target="c" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="420" />
+              <mxPoint x="960" y="175" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="r" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" target="c" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" target="db" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" target="sp" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="izQu0F7WAWBBU0UeQNo7-1" edge="1" parent="1" source="s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.604;entryDx=0;entryDy=0;entryPerimeter=0;" target="c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

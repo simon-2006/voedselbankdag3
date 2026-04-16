@@ -1,0 +1,72 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+
+class Gezin {
+  +Id: bigint
+  +Naam: varchar(120)
+  +Omschrijving: varchar(255)
+  +AantalVolwassenen: int
+  +AantalKinderen: int
+  +AantalBabys: int
+  +TotaalAantalPersonen: int
+  +IsActief: bit
+}
+
+class Persoon {
+  +Id: bigint
+  +GezinId: bigint
+  +Voornaam: varchar(100)
+  +Tussenvoegsel: varchar(50)
+  +Achternaam: varchar(100)
+  +IsVertegenwoordiger: bit
+  +IsActief: bit
+}
+
+class Eetwens {
+  +Id: bigint
+  +Naam: varchar(100)
+  +Omschrijving: varchar(255)
+  +IsActief: bit
+}
+
+class EetwensPerGezin {
+  +Id: bigint
+  +GezinId: bigint
+  +EetwensId: bigint
+  +IsActief: bit
+}
+
+class Voedselpakket {
+  +Id: bigint
+  +GezinId: bigint
+  +PakketNummer: int
+  +DatumSamenstelling: date
+  +DatumUitgifte: date
+  +Status: varchar(50)
+  +IsActief: bit
+}
+
+class ProductPerVoedselPakket {
+  +Id: bigint
+  +VoedselpakketId: bigint
+  +ProductId: bigint
+  +AantalProductEenheden: int
+  +IsActief: bit
+}
+
+Gezin "1" -- "0..*" Persoon : bevat
+Gezin "1" -- "0..*" Voedselpakket : heeft
+Gezin "1" -- "0..*" EetwensPerGezin : koppeling
+Eetwens "1" -- "0..*" EetwensPerGezin : koppeling
+Voedselpakket "1" -- "0..*" ProductPerVoedselPakket : bevat
+
+note right of Voedselpakket
+Statuswaarden User Story 04:
+- NietUitgereikt
+- Uitgereikt
+- NietMeerIngeschreven
+end note
+
+@enduml
